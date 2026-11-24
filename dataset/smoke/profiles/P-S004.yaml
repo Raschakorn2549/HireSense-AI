@@ -20,4 +20,4 @@ experience:
       - {text: "Wrote SQL transformations that load the BigQuery warehouse.", skills: [sql, bigquery]}
       - {text: "Reviewed job changes in Git before each release.", skills: [git]}
 education:
-  - {degree: bachelor, degree_text: "B.Sc. Statistics", field: "Statistics", institution: "Example University", end_year: 2022}
+  - {degree: bachelor, degree_text: "B.Sc. Statistics", field: "Statistics", institution: "Example University", end_year: 2022, skills: [statistics]}

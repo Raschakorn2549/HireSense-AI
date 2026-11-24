@@ -1,0 +1,18 @@
+# Tier B — first 8 resumes, used for the annotation pilot (docs/03 §10).
+# This file contains only ids, so it is safe to open. The profiles it points to
+# and the generated labels are the answer key: the annotator must NOT open
+# dataset/profiles/eval/ or dataset/labels/generated/ (blind annotation, docs/02 §4.2).
+role: eval
+tier: B
+profiles_dir: ../profiles/eval
+pdf_dir: ../pdf/eval
+labels_dir: ../labels/generated
+resumes:
+  - {resume_id: E-001, profile: P-E001, identity: I-007, template: T4}
+  - {resume_id: E-002, profile: P-E002, identity: I-008, template: T5}
+  - {resume_id: E-003, profile: P-E003, identity: I-009, template: T4}
+  - {resume_id: E-004, profile: P-E004, identity: I-010, template: T5}
+  - {resume_id: E-005, profile: P-E005, identity: I-011, template: T4}
+  - {resume_id: E-006, profile: P-E006, identity: I-012, template: T5}
+  - {resume_id: E-007, profile: P-E007, identity: I-013, template: T4}
+  - {resume_id: E-008, profile: P-E008, identity: I-014, template: T5}

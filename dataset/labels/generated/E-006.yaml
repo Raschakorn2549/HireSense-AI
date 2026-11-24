@@ -1,0 +1,35 @@
+resume_id: E-006
+profile_id: P-E006
+identity_id: I-012
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Siriporn Thongkham
+  email: siriporn.t@example.com
+  phone: 080-000-0106
+skills_stated:
+- airflow
+- bigquery
+- data_modeling
+- dbt
+- etl
+- python
+- spark
+- sql
+skills_listed_only:
+- data_modeling
+mentioned_not_held:
+- java
+- kafka
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Computer Engineering
+  institution: Example University
+  end_year: 2021
+experience:
+- title: Data Engineer
+  employer: Signal Example Telecom
+  start: 2022-03
+  end: null

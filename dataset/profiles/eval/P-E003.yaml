@@ -1,0 +1,32 @@
+profile_id: P-E003
+location: "Bangkok, Thailand"
+phone: "080-000-0103"
+summary: "Machine learning engineer with three years of experience building forecasting and fraud models."
+skills:
+  - {id: python, text: Python}
+  - {id: r_lang, text: R}
+  - {id: sql, text: SQL}
+  - {id: scikit_learn, text: scikit-learn}
+  - {id: pytorch, text: PyTorch}
+  - {id: pandas, text: Pandas}
+  - {id: mlflow, text: MLflow}
+  - {id: docker, text: Docker}
+  - {id: machine_learning, text: Machine Learning}
+experience:
+  - title: Machine Learning Engineer
+    employer: Shield Example Bank
+    start: 2022-09
+    end: null
+    bullets:
+      - {text: "Trained fraud detection models with scikit-learn on 30 million card transactions.", skills: [scikit_learn]}
+      - {text: "Prepared training data with Pandas and validated it against the warehouse in SQL.", skills: [pandas, sql]}
+      - {text: "Tracked experiments in MLflow and packaged models with Docker.", skills: [mlflow, docker]}
+      - {text: "Prototyped a sequence model in PyTorch for merchant risk scoring.", skills: [pytorch]}
+  - title: Junior Data Scientist
+    employer: Forecast Example Co
+    start: 2021-07
+    end: 2022-08
+    bullets:
+      - {text: "Built demand forecasts in R and Python for 300 stores.", skills: [r_lang, python]}
+education:
+  - {degree: master, degree_text: "M.Sc. Data Science", field: "Data Science", institution: "Example University", end_year: 2021}

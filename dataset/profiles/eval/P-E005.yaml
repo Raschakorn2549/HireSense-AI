@@ -1,0 +1,39 @@
+profile_id: P-E005
+location: "Bangkok, Thailand"
+phone: "080-000-0105"
+summary: "Full-stack developer with five years of experience across e-commerce and healthcare products."
+ignore_mentions:
+  - {id: sql, reason: "'SQL Server' contains the word SQL; docs/03 §4.3 labels it sql_server only"}
+skills:
+  - {id: typescript, text: TypeScript}
+  - {id: react, text: React}
+  - {id: nodejs, text: Node.js}
+  - {id: sql_server, text: SQL Server}
+  - {id: mongodb, text: MongoDB}
+  - {id: aws, text: AWS}
+  - {id: graphql, text: GraphQL}
+experience:
+  - title: Full-Stack Developer
+    employer: Care Example Health
+    start: 2022-02
+    end: null
+    bullets:
+      - {text: "Built patient portal features in React and TypeScript on top of a Node.js API.", skills: [react, typescript, nodejs]}
+      - {text: "Designed GraphQL resolvers that replaced eleven separate REST endpoints.", skills: [graphql, rest_api]}
+      - {text: "Moved the services to containerization on the staging cluster.", skills: [docker]}
+      - {text: "Deployed the API on AWS (S3, EC2) with automated backups.", skills: [aws, s3, ec2]}
+  - title: Software Developer
+    employer: Shop Example Co
+    start: 2019-06
+    end: 2022-01
+    bullets:
+      - {text: "Maintained order data in SQL Server and MongoDB.", skills: [sql_server, mongodb]}
+      - {text: "Built the checkout flow in React.", skills: [react]}
+  - title: Web Developer Intern
+    employer: Agency Example
+    start: 2019-01
+    end: 2019-05
+    bullets:
+      - {text: "Fixed layout bugs on client websites.", skills: []}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Computer Science", field: "Computer Science", institution: "Example University", end_year: 2018}

@@ -15,3 +15,12 @@ identities:
   - {identity_id: I-004, prefix: "Ms.",  given_name: Priya,  family_name: Raman,    pronouns: she/her}
   - {identity_id: I-005, prefix: "Mr.",  given_name: Daniel, family_name: Carter,   pronouns: he/him}
   - {identity_id: I-006, prefix: "Ms.",  given_name: Meilin, family_name: Tan,      pronouns: she/her}
+  # Tier B pilot (2026-11-24)
+  - {identity_id: I-007, prefix: "Mr.",  given_name: Kittipong, family_name: Charoenrat, pronouns: he/him}
+  - {identity_id: I-008, prefix: "Ms.",  given_name: Nattaya,   family_name: Phromsri,   pronouns: she/her}
+  - {identity_id: I-009, prefix: "Mx.",  given_name: Sam,       family_name: Okafor,     pronouns: they/them}
+  - {identity_id: I-010, prefix: "Ms.",  given_name: Hana,      family_name: Takeda,     pronouns: she/her}
+  - {identity_id: I-011, prefix: "Mr.",  given_name: Rahul,     family_name: Desai,      pronouns: he/him}
+  - {identity_id: I-012, prefix: "Ms.",  given_name: Siriporn,  family_name: Thongkham,  pronouns: she/her}
+  - {identity_id: I-013, prefix: "Mr.",  given_name: Minh,      family_name: Tran,       pronouns: he/him}
+  - {identity_id: I-014, prefix: "Ms.",  given_name: Laura,     family_name: Whitfield,  pronouns: she/her}

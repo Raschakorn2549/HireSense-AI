@@ -1,0 +1,43 @@
+resume_id: E-005
+profile_id: P-E005
+identity_id: I-011
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mr. Rahul Desai
+  email: rahul.d@example.com
+  phone: 080-000-0105
+skills_stated:
+- aws
+- docker
+- ec2
+- graphql
+- mongodb
+- nodejs
+- react
+- rest_api
+- s3
+- sql_server
+- typescript
+skills_listed_only: []
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Computer Science
+  institution: Example University
+  end_year: 2018
+experience:
+- title: Full-Stack Developer
+  employer: Care Example Health
+  start: 2022-02
+  end: null
+- title: Software Developer
+  employer: Shop Example Co
+  start: 2019-06
+  end: 2022-01
+- title: Web Developer Intern
+  employer: Agency Example
+  start: 2019-01
+  end: 2019-05

@@ -1,0 +1,26 @@
+profile_id: P-E002
+location: "Nonthaburi, Thailand"
+phone: "080-000-0102"
+summary: "Statistics graduate with a six-month analytics internship. Coursework included machine learning and A/B testing. Familiar with Tableau."
+skills:
+  - {id: sql, text: SQL}
+  - {id: excel, text: Excel}
+  - {id: power_bi, text: Power BI}
+  - {id: statistics, text: Statistics}
+  - {id: machine_learning, text: Machine Learning}
+  - {id: ab_testing, text: A/B Testing}
+  - {id: tableau, text: Tableau}
+  - {id: python, text: Python}
+experience:
+  - title: Data Analyst Intern
+    employer: Market Example Co
+    start: 2025-01
+    end: 2025-06
+    bullets:
+      - {text: "Wrote SQL queries to build a weekly sales report for 12 branches.", skills: [sql]}
+      - {text: "Built Power BI dashboards used in the Monday operations meeting.", skills: [power_bi]}
+      - {text: "Cleaned survey data in Excel with pivot tables before analysis.", skills: [excel]}
+projects:
+  - {name: "Churn analysis", text: "Explored customer churn in Python and presented findings to the class.", skills: [python]}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Statistics", field: "Statistics", institution: "Example University", end_year: 2024, skills: [statistics]}

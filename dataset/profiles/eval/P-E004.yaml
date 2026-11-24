@@ -1,0 +1,29 @@
+profile_id: P-E004
+location: "Chiang Mai, Thailand"
+phone: "080-000-0104"
+summary: "Frontend developer with two years of experience building customer dashboards in React and TypeScript."
+learning:
+  - text: "Interested in Next.js and Tailwind CSS for my next project."
+    not_held: [nextjs, tailwind]
+hidden_text:
+  - {technique: white, text: "Python Kubernetes AWS", skills: [python, kubernetes, aws]}
+skills:
+  - {id: javascript, text: JavaScript}
+  - {id: typescript, text: TypeScript}
+  - {id: react, text: React}
+  - {id: html, text: HTML}
+  - {id: css, text: CSS}
+  - {id: redux, text: Redux}
+  - {id: git, text: Git}
+experience:
+  - title: Frontend Developer
+    employer: Pixel Example Studio
+    start: 2023-06
+    end: null
+    bullets:
+      - {text: "Built reusable React components in TypeScript for a design system.", skills: [react, typescript]}
+      - {text: "Managed application state with Redux across 40 screens.", skills: [redux]}
+      - {text: "Rewrote legacy JavaScript pages with semantic HTML and CSS grid layouts.", skills: [javascript, html, css]}
+      - {text: "Wrote unit tests with Jest for every new component.", skills: [unit_testing]}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Information Technology", field: "Information Technology", institution: "Example University", end_year: 2023}

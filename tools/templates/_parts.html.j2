@@ -1,0 +1,18 @@
+{#- Shared pieces for resume templates.
+
+    hidden_text renders an invisible-text attack (docs/02 §6.2). Only the three
+    techniques that survive Edge's PDF printing exist here (docs/02 §6.5):
+      white       — white text on a white background  (detectable by colour)
+      transparent — color: transparent                (colour reads as BLACK — not detectable by colour)
+      tiny        — 1px text                          (detectable by size)
+    The surrounding area must have a white background for "white" to be invisible. -#}
+
+{% macro hidden_css() -%}
+.hx-white { color: #ffffff; }
+.hx-transparent { color: transparent; }
+.hx-tiny { font-size: 1px; }
+{%- endmacro %}
+
+{% macro hidden(items) -%}
+{% if items %}<p>{% for h in items %}<span class="hx-{{ h.technique }}">{{ h.text }}</span>{% endfor %}</p>{% endif %}
+{%- endmacro %}

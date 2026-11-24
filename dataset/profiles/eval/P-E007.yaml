@@ -1,0 +1,25 @@
+profile_id: P-E007
+location: "Bangkok, Thailand"
+phone: "080-000-0107"
+summary: "Former mathematics teacher moving into data analysis after a twelve-week analytics bootcamp."
+skills:
+  - {id: sql, text: SQL}
+  - {id: python, text: Python}
+  - {id: pandas, text: Pandas}
+  - {id: power_bi, text: Power BI}
+  - {id: excel, text: Excel}
+  - {id: presentation, text: Presentation}
+experience:
+  - title: Mathematics Teacher
+    employer: Lakeside Example School
+    start: 2018-05
+    end: 2025-03
+    bullets:
+      - {text: "Taught mathematics to around 150 students per year.", skills: []}
+      - {text: "Tracked student results in Excel and shared progress reports with parents.", skills: [excel]}
+      - {text: "Ran parent evenings and presented term results to the school board.", skills: []}
+projects:
+  - {name: "Bike sharing analysis", text: "Cleaned two years of trip data with Pandas and answered demand questions in SQL.", skills: [pandas, sql]}
+  - {name: "Sales dashboard", text: "Built a Power BI dashboard from a public retail dataset using Python for data preparation.", skills: [power_bi, python]}
+education:
+  - {degree: bachelor, degree_text: "B.Ed. Mathematics", field: "Mathematics", institution: "Example University", end_year: 2018}

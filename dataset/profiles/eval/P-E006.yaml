@@ -1,0 +1,28 @@
+profile_id: P-E006
+location: "Khon Kaen, Thailand"
+phone: "080-000-0106"
+summary: "Data engineer with three years of experience building batch pipelines for a telecom operator."
+learning:
+  - text: "Currently learning Kafka for streaming workloads."
+    not_held: [kafka]
+  - text: "No commercial experience with Java yet."
+    not_held: [java]
+skills:
+  - {id: sql, text: SQL}
+  - {id: python, text: Python}
+  - {id: airflow, text: Airflow}
+  - {id: dbt, text: dbt}
+  - {id: bigquery, text: BigQuery}
+  - {id: spark, text: Spark}
+  - {id: data_modeling, text: Data Modeling}
+experience:
+  - title: Data Engineer
+    employer: Signal Example Telecom
+    start: 2022-03
+    end: null
+    bullets:
+      - {text: "Built ELT pipelines in Python and SQL orchestrated with Airflow.", skills: [etl, python, sql, airflow]}
+      - {text: "Modelled the billing warehouse in BigQuery with dbt.", skills: [bigquery, dbt]}
+      - {text: "Rewrote a slow nightly job in Spark and cut run time from 4 hours to 35 minutes.", skills: [spark]}
+education:
+  - {degree: bachelor, degree_text: "B.Eng. Computer Engineering", field: "Computer Engineering", institution: "Example University", end_year: 2021}

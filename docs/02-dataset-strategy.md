@@ -349,6 +349,7 @@ dataset/
 │   ├── dev/                      # → Tier A
 │   └── eval/                     # → Tier B
 ├── identities/                   # 🆕 ชื่อ/คำนำหน้า/สรรพนาม แยกจาก profile (§6.1)
+├── builds/                       # 🆕 แผน render: resume_id -> profile x identity x template (มีแต่ id เปิดดูได้)
 ├── pdf/
 │   ├── dev/
 │   └── eval/
@@ -358,7 +359,8 @@ dataset/
 │   └── expected-ranking.csv      # ลำดับที่ถูกต้อง ใช้เป็น regression test
 ├── labels/
 │   ├── resumes/                  # YAML ต่อ resume (Tier B)
-│   └── rankings/                 # CSV ต่อตำแหน่ง
+│   ├── rankings/                 # CSV ต่อตำแหน่ง
+│   └── generated/                # 🆕 label ที่ generator สร้างให้ Tier A/B · 🔒 ผู้ annotate ห้ามเปิด
 └── raw/                          # 🔒 Tier C — git-ignored เสมอ
     └── external/
 ```
@@ -420,8 +422,8 @@ X-001,9c81...,C,unknown,careercorpus,CC-BY-4.0,2026-11-21,,,stress,
 | 1 | เอกสาร 3 ไฟล์ (ไฟล์นี้คือ 1 ใน 3) | ✅ เสร็จแล้ว |
 | 2 | **taxonomy v0** — seed จากความรู้สายงาน ไม่ต้องดาวน์โหลด | ไม่ |
 | 3 | job description 6 ตำแหน่ง (prose + structured) | ไม่ |
-| 4 | generator + render PDF ~8 ใบ ด้วย template T4–T5 · **แยกฟิลด์ `identity` ออกจาก `profile` ในสคีมาตั้งแต่ตอนนี้** (§6.1) | ไม่ |
-| 4.1 | 🆕 **smoke set 6 ใบ** — resume สมมติที่เรารู้ลำดับคำตอบอยู่แล้ว (ดู §6.4) | ไม่ |
+| 4 | ✅ **เสร็จ 2026-11-24** — generator + render PDF 8 ใบ (`E-001`…`E-008`) ด้วย template T4–T5 · identity แยกจาก profile แล้ว (§6.1) | ไม่ |
+| 4.1 | ✅ **เสร็จ 2026-11-24** — smoke set 6 ใบ (§6.4) | ไม่ |
 | 5 | **pilot annotate 5 ใบ** → วัดเวลาจริง → แก้ guidelines เป็น v2 | ไม่ |
 | 6 | Tier A 150 ใบ (template T1–T3) | ไม่ |
 | 7 | Tier B 30 + 10 holdout (template T4–T5) + blind annotation | ไม่ |
@@ -484,6 +486,19 @@ X-001,9c81...,C,unknown,careercorpus,CC-BY-4.0,2026-11-21,,,stress,
 | §8 | เพิ่มคอลัมน์ `renderer` | §6.1 กำหนดให้บันทึกเวอร์ชันเบราว์เซอร์ แต่ manifest ไม่มีช่องให้บันทึก |
 | §6.4 | smoke set เก็บเป็น **เกรด** ยอมให้เสมอกันได้ (S-002 = S-003, S-005 = S-006) | ตาม rubric `03` §6.2 สองคู่นี้ได้เกรดเท่ากัน · การบังคับลำดับจะทำให้ test เรียกร้องเกินกว่าที่เฉลยกำหนด |
 | — | taxonomy เป็น **0.1** (เพิ่มชื่อสั้น 8 + ชื่อที่ต้องมีบริบท 3) | ดู changelog ในหัวไฟล์ `taxonomy/skills.v0.yaml` |
+| §7 · §10 | เพิ่ม `builds/` และ `labels/generated/` · ขั้นที่ 4 และ 4.1 เสร็จ · Tier B 8 ใบแรกใช้ T4 (สองคอลัมน์ แถบข้างขวา) และ T5 (ตาราง + footer) อย่างละ 4 ใบ · 1 ใบมีข้อความซ่อน | ตามแผนที่อนุมัติ |
+
+**สิ่งที่ค้นพบระหว่างสร้าง Tier B 8 ใบแรก:**
+
+1. **เฉลยของ smoke S-004 ขาด `statistics`** — จบ "B.Sc. Statistics" ซึ่งตาม `03` §4.3 ต้องนับ ·
+   ตัวตรวจย้อนทางเดิมไม่ได้สแกนชื่อปริญญา ชื่อตำแหน่ง และชื่อโปรเจค · ขยายการสแกนแล้วจึงเจอ ·
+   แก้เฉลยแล้ว PDF ไม่เปลี่ยน
+2. 🔴 **entry `js_abbrev` ของ taxonomy จับผิด 2 แบบ** — ชื่อเต็มซ้ำกับ `javascript` และ alias `js`
+   ไปจับข้างใน `Node.js` `Next.js` `Vue.js` · generator แก้ด้วย **longest-match-first** +
+   ถือว่า entry ที่ชื่อเต็มเหมือนกันคือทักษะเดียว (`tools/resumegen.py: find_skills`) ·
+   **Phase 2 parser ต้องใช้กฎเดียวกัน** ไม่งั้นทุกคนที่เขียน Node.js จะถูกนับว่า "ระบุ JavaScript"
+3. ตัวกันชื่อคนหลุดเข้า profile เคยเข้าใจผิดว่าชื่อโปรเจค (`projects[].name`) เป็นชื่อคน · แก้ให้ `name` ห้ามเฉพาะระดับบนสุด
+4. ทั้ง 8 ใบได้ 1 หน้า → มิติ **resume 2 หน้าขึ้นไป** (§6.2) ยังไม่ถูกครอบ · ต้องใส่ใน Tier B 22 ใบที่เหลือ
 
 **สิ่งที่ค้นพบระหว่างสร้าง generator (บันทึกไว้ในโค้ด `tools/resumegen.py`):**
 Edge ฝังเวลาสร้างไฟล์ลง PDF ระดับวินาที → render ซ้ำแล้ว sha256 เปลี่ยนทั้งที่เนื้อหาเดิม ·

@@ -1,0 +1,72 @@
+{#- T5 — single column built from TABLES (skills grid, dated work history, education),
+    with a fixed footer repeated on every page. Tables are the second layout family
+    that line-by-line extractors commonly scramble.
+    Reserved for the evaluation set (Tier B) — docs/02 §5.1.
+    Identity (name, pronouns, e-mail) appears ONLY in <header>; the footer must never
+    contain it. See docs/01 §11.6. -#}
+{% import "_parts.html.j2" as parts %}
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  @page { size: A4; margin: 16mm 18mm 20mm; }
+  body { font-family: Calibri, "Segoe UI", Arial, sans-serif; font-size: 10.5pt; color: #1f2933;
+         margin: 0; line-height: 1.35; background: #ffffff; }
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  header h1 { margin: 0; font-size: 22pt; letter-spacing: .3px; }
+  header .pronouns { font-size: 10.5pt; color: #52606d; font-weight: normal; }
+  header .contact { text-align: right; font-size: 9.5pt; color: #3e4c59; }
+  h2 { font-size: 11pt; background: #e4e7eb; padding: 3px 6px; margin: 12px 0 6px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { vertical-align: top; padding: 2px 6px; }
+  table.skills td { width: 33%; border-bottom: 1px dotted #cbd2d9; }
+  table.work td.dates { width: 24%; color: #52606d; white-space: nowrap; }
+  table.work ul { margin: 2px 0 8px; padding-left: 16px; }
+  table.edu td { border-bottom: 1px solid #e4e7eb; }
+  .footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center;
+            font-size: 8pt; color: #9aa5b1; }
+  p { margin: 0 0 6px; }
+  {{ parts.hidden_css() }}
+</style></head><body>
+<header>
+  <h1>{{ name }}{% if pronouns %} <span class="pronouns">({{ pronouns }})</span>{% endif %}</h1>
+  <div class="contact">{{ email }}{% if p.phone %}<br>{{ p.phone }}{% endif %}<br>{{ p.location }}</div>
+</header>
+
+<h2>Professional Summary</h2>
+<p>{{ p.summary }}</p>
+{% for goal in p.learning %}<p>{{ goal.text }}</p>{% endfor %}
+{{ parts.hidden(p.hidden_text) }}
+
+<h2>Core Skills</h2>
+<table class="skills">
+{% for row in p.skills | batch(3, '') %}
+  <tr>{% for s in row %}<td>{{ s.text if s else '' }}</td>{% endfor %}</tr>
+{% endfor %}
+</table>
+
+{% if p.experience %}
+<h2>Work History</h2>
+<table class="work">
+{% for job in p.experience %}
+  <tr>
+    <td class="dates">{{ job.start | month }} – {{ job.end | month }}</td>
+    <td><b>{{ job.title }}</b>, <i>{{ job.employer }}</i>
+      <ul>{% for b in job.bullets %}<li>{{ b.text }}</li>{% endfor %}</ul></td>
+  </tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% if p.projects %}
+<h2>Projects</h2>
+{% for pr in p.projects %}<p><b>{{ pr.name }}</b> — {{ pr.text }}</p>{% endfor %}
+{% endif %}
+
+<h2>Education</h2>
+<table class="edu">
+{% for e in p.education %}
+  <tr><td><b>{{ e.degree_text }}</b></td><td>{{ e.institution }}</td><td>{{ e.end_year }}</td></tr>
+{% endfor %}
+</table>
+
+<div class="footer">Resume &middot; available for interview on request</div>
+</body></html>

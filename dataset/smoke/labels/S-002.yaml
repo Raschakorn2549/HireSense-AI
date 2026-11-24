@@ -22,6 +22,7 @@ skills_listed_only:
 - rest_api
 mentioned_not_held: []
 oov_skills: []
+hidden_payload_skills: []
 education:
 - degree: bachelor
   field: Computer Science

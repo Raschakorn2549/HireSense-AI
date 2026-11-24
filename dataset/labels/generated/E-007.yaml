@@ -1,0 +1,31 @@
+resume_id: E-007
+profile_id: P-E007
+identity_id: I-013
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mr. Minh Tran
+  email: minh.t@example.com
+  phone: 080-000-0107
+skills_stated:
+- excel
+- pandas
+- power_bi
+- presentation
+- python
+- sql
+skills_listed_only:
+- presentation
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Mathematics
+  institution: Example University
+  end_year: 2018
+experience:
+- title: Mathematics Teacher
+  employer: Lakeside Example School
+  start: 2018-05
+  end: 2025-03

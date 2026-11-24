@@ -1,0 +1,42 @@
+resume_id: E-001
+profile_id: P-E001
+identity_id: I-007
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mr. Kittipong Charoenrat
+  email: kittipong.c@example.com
+  phone: 080-000-0101
+skills_stated:
+- django
+- docker
+- fastapi
+- git
+- leadership
+- linux
+- mysql
+- postgresql
+- python
+- redis
+- rest_api
+skills_listed_only:
+- docker
+- git
+- redis
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Software Engineering
+  institution: Example Institute of Technology
+  end_year: 2020
+experience:
+- title: Senior Backend Engineer
+  employer: Route Example Co
+  start: 2023-04
+  end: null
+- title: Backend Developer
+  employer: Ticket Example Ltd
+  start: 2020-08
+  end: 2023-03

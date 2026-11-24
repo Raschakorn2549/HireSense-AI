@@ -1,0 +1,37 @@
+resume_id: E-008
+profile_id: P-E008
+identity_id: I-014
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Laura Whitfield
+  email: laura.w@example.com
+  phone: 080-000-0108
+skills_stated:
+- algorithms
+- c_sharp
+- css
+- docker
+- git
+- html
+- java
+- javascript
+- linux
+- python
+- sql
+skills_listed_only:
+- algorithms
+- c_sharp
+- docker
+- javascript
+- linux
+- python
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Computer Engineering
+  institution: Example University
+  end_year: 2027
+experience: []

@@ -16,6 +16,7 @@ mentioned_not_held: []
 oov_skills:
 - Financial reporting
 - IFRS
+hidden_payload_skills: []
 education:
 - degree: bachelor
   field: Accounting

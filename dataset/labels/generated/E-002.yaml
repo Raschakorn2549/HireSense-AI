@@ -1,0 +1,35 @@
+resume_id: E-002
+profile_id: P-E002
+identity_id: I-008
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Nattaya Phromsri
+  email: nattaya.p@example.com
+  phone: 080-000-0102
+skills_stated:
+- ab_testing
+- excel
+- machine_learning
+- power_bi
+- python
+- sql
+- statistics
+- tableau
+skills_listed_only:
+- ab_testing
+- machine_learning
+- tableau
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: bachelor
+  field: Statistics
+  institution: Example University
+  end_year: 2024
+experience:
+- title: Data Analyst Intern
+  employer: Market Example Co
+  start: 2025-01
+  end: 2025-06

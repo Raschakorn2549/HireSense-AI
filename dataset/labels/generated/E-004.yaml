@@ -1,0 +1,38 @@
+resume_id: E-004
+profile_id: P-E004
+identity_id: I-010
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Hana Takeda
+  email: hana.t@example.com
+  phone: 080-000-0104
+skills_stated:
+- css
+- git
+- html
+- javascript
+- react
+- redux
+- typescript
+- unit_testing
+skills_listed_only:
+- git
+mentioned_not_held:
+- nextjs
+- tailwind
+oov_skills: []
+hidden_payload_skills:
+- aws
+- kubernetes
+- python
+education:
+- degree: bachelor
+  field: Information Technology
+  institution: Example University
+  end_year: 2023
+experience:
+- title: Frontend Developer
+  employer: Pixel Example Studio
+  start: 2023-06
+  end: null

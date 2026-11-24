@@ -1,0 +1,38 @@
+resume_id: E-003
+profile_id: P-E003
+identity_id: I-009
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mx. Sam Okafor
+  email: sam.o@example.com
+  phone: 080-000-0103
+skills_stated:
+- docker
+- machine_learning
+- mlflow
+- pandas
+- python
+- pytorch
+- r_lang
+- scikit_learn
+- sql
+skills_listed_only:
+- machine_learning
+mentioned_not_held: []
+oov_skills: []
+hidden_payload_skills: []
+education:
+- degree: master
+  field: Data Science
+  institution: Example University
+  end_year: 2021
+experience:
+- title: Machine Learning Engineer
+  employer: Shield Example Bank
+  start: 2022-09
+  end: null
+- title: Junior Data Scientist
+  employer: Forecast Example Co
+  start: 2021-07
+  end: 2022-08

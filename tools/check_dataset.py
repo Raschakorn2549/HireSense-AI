@@ -178,6 +178,16 @@ def main() -> int:
             missing_text.append(f"{rid}: e-mail {email} not found in the PDF text")
     report.check("every labelled skill and e-mail is readable back from the PDF", missing_text)
 
+    # An invisible-text attack only tests something if the payload really is in the
+    # PDF's text layer. Experiment 01 showed Edge silently drops some techniques.
+    vacuous = []
+    for rid, lab in labels.items():
+        if rid in located and lab.get("hidden_payload_skills"):
+            text = pdf_text(located[rid])
+            vacuous += [f"{rid}: hidden {sid!r} is not in the PDF text layer — the attack tests nothing"
+                        for sid in lab["hidden_payload_skills"] if not mentions(text, taxonomy[sid])]
+    report.check("every hidden-text payload really exists in the PDF text layer", vacuous)
+
     # ---- human labels (Tier B) — docs/03 §8.3 ----------------------------
     human = [yaml.safe_load(p.read_text(encoding="utf-8")) for p in HUMAN_LABEL_DIR.glob("*.yaml")] \
         if HUMAN_LABEL_DIR.exists() else []

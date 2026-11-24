@@ -1,0 +1,21 @@
+profile_id: P-E008
+location: "Pathum Thani, Thailand"
+phone: "080-000-0108"
+summary: "Third-year computer engineering student looking for a summer internship in software development."
+skills:
+  - {id: python, text: Python}
+  - {id: java, text: Java}
+  - {id: c_sharp, text: "C#"}
+  - {id: javascript, text: JavaScript}
+  - {id: html, text: HTML}
+  - {id: css, text: CSS}
+  - {id: sql, text: SQL}
+  - {id: git, text: Git}
+  - {id: linux, text: Linux}
+  - {id: docker, text: Docker}
+  - {id: algorithms, text: Data Structures}
+projects:
+  - {name: "Library app", text: "A desktop library manager written in Java with a SQL database for a second-year course.", skills: [java, sql]}
+  - {name: "Personal website", text: "Built with HTML and CSS and hosted on GitHub Pages.", skills: [html, css, git]}
+education:
+  - {degree: bachelor, degree_text: "B.Eng. Computer Engineering (expected)", field: "Computer Engineering", institution: "Example University", end_year: 2027}

@@ -1,0 +1,31 @@
+profile_id: P-E001
+location: "Bangkok, Thailand"
+phone: "080-000-0101"
+summary: "Backend engineer with four years of experience on logistics and booking systems. Familiar with Docker and Redis."
+skills:
+  - {id: python, text: Python}
+  - {id: fastapi, text: FastAPI}
+  - {id: django, text: Django}
+  - {id: postgresql, text: PostgreSQL}
+  - {id: git, text: Git}
+  - {id: docker, text: Docker}
+  - {id: redis, text: Redis}
+  - {id: linux, text: Linux}
+experience:
+  - title: Senior Backend Engineer
+    employer: Route Example Co
+    start: 2023-04
+    end: null
+    bullets:
+      - {text: "Led a team of three engineers building booking REST APIs with FastAPI.", skills: [leadership, rest_api, fastapi]}
+      - {text: "Moved reporting queries from MySQL to PostgreSQL and cut page load time by half.", skills: [mysql, postgresql]}
+      - {text: "Wrote Python scripts that reconcile carrier invoices every night.", skills: [python]}
+  - title: Backend Developer
+    employer: Ticket Example Ltd
+    start: 2020-08
+    end: 2023-03
+    bullets:
+      - {text: "Maintained a Django monolith serving 40,000 daily users.", skills: [django]}
+      - {text: "Ran nightly jobs on Linux servers with cron.", skills: [linux]}
+education:
+  - {degree: bachelor, degree_text: "B.Eng. Software Engineering", field: "Software Engineering", institution: "Example Institute of Technology", end_year: 2020}

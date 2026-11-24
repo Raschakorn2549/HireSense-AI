@@ -14,9 +14,11 @@ skills_stated:
 - git
 - python
 - sql
+- statistics
 skills_listed_only: []
 mentioned_not_held: []
 oov_skills: []
+hidden_payload_skills: []
 education:
 - degree: bachelor
   field: Statistics

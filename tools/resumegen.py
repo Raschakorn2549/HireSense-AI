@@ -62,6 +62,11 @@ ALLOWED_TEMPLATES = {
 
 DEGREE_LEVELS = {"high_school", "vocational", "bachelor", "master", "phd"}
 
+# Invisible-text attacks. Only the techniques that SURVIVE Edge's PDF printing are
+# allowed: font-size 0, off-page and opacity 0 are dropped by Chromium, so a test
+# built on them would pass without testing anything (docs/02 §6.5).
+HIDDEN_TECHNIQUES = {"white", "transparent", "tiny"}
+
 
 class ProfileError(ValueError):
     """A profile would produce a dishonest or malformed ground-truth label."""
@@ -92,6 +97,40 @@ def surface_forms(entry: dict) -> list[str]:
     return sorted({f.lower() for f in forms}, key=len, reverse=True)
 
 
+def normalized_ids(taxonomy: dict[str, dict]) -> dict[str, str]:
+    """Entries with the same canonical name are the same skill.
+
+    taxonomy 0.1 has `js_abbrev` (canonical "JavaScript") next to `javascript`; both
+    must count as one skill, or "JavaScript" in a resume would look like two.
+    """
+    first: dict[str, str] = {}
+    return {sid: first.setdefault(entry["canonical"].lower(), sid) for sid, entry in taxonomy.items()}
+
+
+def find_skills(text: str, taxonomy: dict[str, dict], norm: dict[str, str]) -> set[str]:
+    """All skills mentioned in `text`, resolving overlaps LONGEST MATCH FIRST.
+
+    Without this, the alias "js" matches inside "Node.js" and "sql" matches inside
+    "SQL Server" — each a skill the writer never stated. Phase 2's parser must use
+    the same rule.
+    """
+    lowered = text.lower()
+    candidates: list[tuple[int, int, int, str]] = []
+    for sid, entry in taxonomy.items():
+        for form in surface_forms(entry):
+            for m in re.finditer(rf"(?<![a-z0-9]){re.escape(form)}(?![a-z0-9])", lowered):
+                candidates.append((m.end() - m.start(), m.start(), m.end(), norm[sid]))
+    candidates.sort(key=lambda c: (-c[0], c[1]))
+    taken: list[tuple[int, int]] = []
+    found: set[str] = set()
+    for _, start, end, sid in candidates:
+        if any(start < t_end and t_start < end for t_start, t_end in taken):
+            continue
+        taken.append((start, end))
+        found.add(sid)
+    return found
+
+
 def mentions(text: str, entry: dict) -> bool:
     """True if `text` contains the skill as a whole word (case-insensitive)."""
     lowered = text.lower()
@@ -106,11 +145,17 @@ def mentions(text: str, entry: dict) -> bool:
 # ---------------------------------------------------------------------------
 
 def _find_identity_fields(obj: Any, path: str = "") -> list[str]:
+    """Identity keys anywhere in the profile.
+
+    `name` is only an identity field at the TOP level: nested, it is legitimately
+    used for things like a project's name. Every other identity key (email,
+    pronouns, given_name, ...) is refused at any depth.
+    """
     hits: list[str] = []
     if isinstance(obj, dict):
         for key, value in obj.items():
             here = f"{path}.{key}" if path else key
-            if key in IDENTITY_FIELDS:
+            if key in IDENTITY_FIELDS and (key != "name" or not path):
                 hits.append(here)
             hits.extend(_find_identity_fields(value, here))
     elif isinstance(obj, list):
@@ -157,6 +202,14 @@ def validate_profile(profile: dict, taxonomy: dict[str, dict]) -> None:
             if sid in taxonomy and not mentions(project["text"], taxonomy[sid]):
                 errors.append(f"projects: {project['name']!r} claims {sid!r} but its text does not mention it")
             claimed_in_use.add(sid)
+    # A degree name can state a skill too ("B.Sc. Statistics"); docs/03 §4.3 counts even
+    # "Coursework: Statistics" as stated.
+    for edu in profile.get("education", []):
+        check_ids(edu.get("skills", []), "education")
+        for sid in edu.get("skills", []):
+            if sid in taxonomy and not mentions(edu["degree_text"], taxonomy[sid]):
+                errors.append(f"education: {edu['degree_text']!r} claims {sid!r} but does not mention it")
+            claimed_in_use.add(sid)
 
     # Learning goals: mentioned, but NOT held. Must not overlap with anything held.
     held = {item["id"] for item in profile.get("skills", []) if item.get("id")} | claimed_in_use
@@ -167,6 +220,18 @@ def validate_profile(profile: dict, taxonomy: dict[str, dict]) -> None:
                 errors.append(f"learning: {sid!r} is listed as not held, but the profile also claims it")
             if sid in taxonomy and not mentions(goal["text"], taxonomy[sid]):
                 errors.append(f"learning: text does not mention {sid!r}: {goal['text']!r}")
+
+    # Hidden text: the payload must be skills the candidate does NOT hold, otherwise the
+    # attack changes nothing and the test proves nothing.
+    for h in profile.get("hidden_text", []):
+        if h.get("technique") not in HIDDEN_TECHNIQUES:
+            errors.append(f"hidden_text: technique {h.get('technique')!r} not in {sorted(HIDDEN_TECHNIQUES)}")
+        check_ids(h.get("skills", []), "hidden_text")
+        for sid in h.get("skills", []):
+            if sid in held:
+                errors.append(f"hidden_text: {sid!r} is also held, so hiding it tests nothing")
+            if sid in taxonomy and not mentions(h["text"], taxonomy[sid]):
+                errors.append(f"hidden_text: text does not mention {sid!r}")
 
     for edu in profile.get("education", []):
         if edu.get("degree") not in DEGREE_LEVELS:
@@ -182,12 +247,16 @@ def validate_profile(profile: dict, taxonomy: dict[str, dict]) -> None:
     visible += [("skills", item["text"]) for item in profile.get("skills", [])]
     visible += [("experience", b["text"]) for j in profile.get("experience", []) for b in j.get("bullets", [])]
     visible += [("projects", pr["text"]) for pr in profile.get("projects", [])]
+    # Titles, project names and degree names are printed on the page too.
+    visible += [("job title", j["title"]) for j in profile.get("experience", [])]
+    visible += [("project name", pr["name"]) for pr in profile.get("projects", [])]
+    visible += [("degree", e["degree_text"]) for e in profile.get("education", [])]
+    norm = normalized_ids(taxonomy)
+    held_norm = {norm.get(s, s) for s in held}
+    ignored_norm = {norm.get(s, s) for s in ignored}
     for where, text in visible:
-        for sid, entry in taxonomy.items():
-            if sid in held or sid in ignored:
-                continue
-            if mentions(text, entry):
-                errors.append(f"{where}: text mentions {sid!r} but no part of the profile declares it: {text!r}")
+        for sid in sorted(find_skills(text, taxonomy, norm) - held_norm - ignored_norm):
+            errors.append(f"{where}: text mentions {sid!r} but no part of the profile declares it: {text!r}")
 
     if errors:
         raise ProfileError(f"{pid}:\n  - " + "\n  - ".join(errors))
@@ -224,6 +293,8 @@ def derive_label(resume_id: str, profile: dict, identity: dict, taxonomy_version
             in_use.extend(bullet.get("skills", []))
     for project in profile.get("projects", []):
         in_use.extend(project.get("skills", []))
+    for edu in profile.get("education", []):
+        in_use.extend(edu.get("skills", []))
 
     stated = sorted(set(listed) | set(in_use))
     listed_only = sorted(set(listed) - set(in_use))
@@ -244,6 +315,8 @@ def derive_label(resume_id: str, profile: dict, identity: dict, taxonomy_version
         "skills_listed_only": listed_only,
         "mentioned_not_held": not_held,       # e.g. "eager to learn X" — must NOT be extracted
         "oov_skills": oov,                    # skills the taxonomy does not know
+        "hidden_payload_skills": sorted(      # invisible text in the PDF — must NOT be extracted
+            {sid for h in profile.get("hidden_text", []) for sid in h.get("skills", [])}),
         "education": [
             {k: e.get(k) for k in ("degree", "field", "institution", "end_year")}
             for e in profile.get("education", [])
@@ -272,7 +345,7 @@ def make_env() -> Environment:
     return env
 
 
-OPTIONAL_LIST_FIELDS = ("learning", "projects", "experience", "education", "skills")
+OPTIONAL_LIST_FIELDS = ("learning", "projects", "experience", "education", "skills", "hidden_text")
 
 
 def render_html(env: Environment, template: str, profile: dict, identity: dict) -> str:

@@ -19,6 +19,7 @@ mentioned_not_held:
 oov_skills:
 - Social media marketing
 - Copywriting
+hidden_payload_skills: []
 education:
 - degree: bachelor
   field: Communication Arts
