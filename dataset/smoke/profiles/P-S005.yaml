@@ -1,0 +1,22 @@
+# S-005 — completely different field (accounting). Chosen outside IT on purpose, so its
+# rank cannot be argued about. Includes out-of-taxonomy skills (no id) on purpose.
+profile_id: P-S005
+location: "Khon Kaen, Thailand"
+phone: "080-000-0005"
+summary: "Accountant with four years of experience in month-end close and audit preparation."
+skills:
+  - {id: excel, text: Excel}
+  - {text: Financial reporting}
+  - {text: IFRS}
+  - {id: presentation, text: Presentation}
+experience:
+  - title: Senior Accountant
+    employer: Ledger Example Co
+    start: 2021-01
+    end: null
+    bullets:
+      - {text: "Ran the month-end close for three business units.", skills: []}
+      - {text: "Built reconciliation workbooks in Excel used by the whole finance team.", skills: [excel]}
+      - {text: "Presented quarterly results to the finance director.", skills: []}
+education:
+  - {degree: bachelor, degree_text: "B.Acc. Accounting", field: "Accounting", institution: "Example University", end_year: 2020}

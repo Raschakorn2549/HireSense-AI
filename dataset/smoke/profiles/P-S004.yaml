@@ -1,0 +1,23 @@
+# S-004 — neighbouring field (data engineering). Shares only python and git with job-001.
+profile_id: P-S004
+location: "Bangkok, Thailand"
+phone: "080-000-0004"
+summary: "Data engineer with two years of experience building batch jobs for a logistics company."
+skills:
+  - {id: python, text: Python}
+  - {id: sql, text: SQL}
+  - {id: airflow, text: Airflow}
+  - {id: etl, text: ETL}
+  - {id: bigquery, text: BigQuery}
+  - {id: git, text: Git}
+experience:
+  - title: Data Engineer
+    employer: Freight Example Co
+    start: 2023-02
+    end: null
+    bullets:
+      - {text: "Built ETL jobs in Python orchestrated with Airflow.", skills: [etl, python, airflow]}
+      - {text: "Wrote SQL transformations that load the BigQuery warehouse.", skills: [sql, bigquery]}
+      - {text: "Reviewed job changes in Git before each release.", skills: [git]}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Statistics", field: "Statistics", institution: "Example University", end_year: 2022}

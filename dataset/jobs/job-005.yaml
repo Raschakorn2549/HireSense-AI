@@ -1,0 +1,39 @@
+job_id: job-005
+title: "Full-Stack Developer"
+family: fullstack
+prose_file: job-005.md
+
+taxonomy_version: 0
+annotated_by: korn
+annotated_at: 2026-11-17
+
+experience:
+  min_years: 2
+  max_years: 4
+
+education:
+  min_degree: bachelor
+  fields:
+    - "Computer Science"
+    - "Software Engineering"
+    - "related field"
+
+required_skills:
+  - typescript
+  - react
+  - nodejs
+  - rest_api
+  - postgresql
+
+preferred_skills:
+  - nextjs
+  - docker
+  - aws
+  - python
+  - graphql
+
+notes: >
+  ตำแหน่งที่ทับซ้อนมากที่สุดในชุด - ทับ job-004 ที่ typescript และ react
+  และทับ job-001 ที่ rest_api และ postgresql
+  คาดว่าเป็นตำแหน่งที่แยกผู้สมัครได้ยากที่สุด และเป็นตัวที่จะเผยว่า
+  TF-IDF แยกบริบทไม่ออกจริงหรือไม่

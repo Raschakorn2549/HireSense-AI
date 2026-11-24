@@ -1,0 +1,33 @@
+# S-001 — expected rank 1 for job-001: every required skill, USED in real work.
+profile_id: P-S001
+location: "Bangkok, Thailand"
+phone: "080-000-0001"
+summary: "Backend developer with three years of experience building and running HTTP services for a payments product."
+skills:
+  - {id: python, text: Python}
+  - {id: fastapi, text: FastAPI}
+  - {id: postgresql, text: PostgreSQL}
+  - {id: rest_api, text: REST APIs}
+  - {id: git, text: Git}
+  - {id: docker, text: Docker}
+  - {id: redis, text: Redis}
+  - {id: unit_testing, text: pytest}
+experience:
+  - title: Backend Developer
+    employer: Lumen Pay Example Co
+    start: 2022-03
+    end: null
+    bullets:
+      - {text: "Designed and built REST APIs in Python with FastAPI for the merchant dashboard.", skills: [rest_api, python, fastapi]}
+      - {text: "Modelled payment data in PostgreSQL and wrote the schema migrations.", skills: [postgresql]}
+      - {text: "Reviewed teammates' pull requests in Git and kept the release branch clean.", skills: [git]}
+      - {text: "Packaged every service with Docker and added Redis caching to the slowest endpoint.", skills: [docker, redis]}
+      - {text: "Raised test coverage of the billing service from 40% to 85% with pytest.", skills: [unit_testing]}
+  - title: Junior Developer
+    employer: Northwind Example Ltd
+    start: 2021-06
+    end: 2022-02
+    bullets:
+      - {text: "Maintained internal tools written in Python.", skills: [python]}
+education:
+  - {degree: bachelor, degree_text: "B.Eng. Computer Engineering", field: "Computer Engineering", institution: "Example Institute of Technology", end_year: 2021}

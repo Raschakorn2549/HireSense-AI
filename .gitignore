@@ -1,0 +1,35 @@
+# ── Personal data ── never commit (docs/02-dataset-strategy.md §2.3, §7)
+# Tier C stress-test files are real resumes from external datasets.
+dataset/raw/
+
+# Uploaded resumes (Phase 5+)
+backend/uploads/
+
+# ── Secrets ──
+.env
+.env.*
+!.env.example
+
+# ── Python ──
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# ── Node (Phase 6) ──
+node_modules/
+dist/
+build/
+
+# ── Notebooks ──
+.ipynb_checkpoints/
+
+# ── OS / editors ──
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/

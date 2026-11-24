@@ -1,0 +1,13 @@
+# This machine has core.autocrlf=true. Without these rules git may rewrite bytes
+# on checkout, and a PDF whose bytes change no longer matches its sha256 in
+# dataset/manifest.csv — the manifest would report every file as tampered with.
+
+# Text files: stored with LF in the repository, checked out with LF everywhere.
+* text=auto eol=lf
+
+# Binary files: never convert, never diff as text.
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.zip  binary

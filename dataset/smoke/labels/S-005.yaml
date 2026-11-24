@@ -1,0 +1,28 @@
+resume_id: S-005
+profile_id: P-S005
+identity_id: I-005
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mr. Daniel Carter
+  email: daniel.c@example.com
+  phone: 080-000-0005
+skills_stated:
+- excel
+- presentation
+skills_listed_only:
+- presentation
+mentioned_not_held: []
+oov_skills:
+- Financial reporting
+- IFRS
+education:
+- degree: bachelor
+  field: Accounting
+  institution: Example University
+  end_year: 2020
+experience:
+- title: Senior Accountant
+  employer: Ledger Example Co
+  start: 2021-01
+  end: null

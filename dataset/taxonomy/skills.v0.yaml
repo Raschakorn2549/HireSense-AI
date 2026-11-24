@@ -1,0 +1,703 @@
+# HireSense AI — Skill Taxonomy v0
+#
+# version:      0.1
+# created:      2026-11-17
+# source:       seed จากความรู้สายงาน (ยังไม่ได้ขุดจากข้อมูลจริง)
+# next:         v1 = ขุดคำศัพท์จาก Mehyaar (MIT) + Kaggle (CC0) ตาม 02-dataset-strategy.md §10
+# coverage:     ⚠️ ยังไม่วัด — จะวัด OOV rate หลัง pilot annotation
+#
+# ────────────────────────────────────────────────────────────────────────
+# กฎแยก alias ออกจาก related (03-annotation-guidelines.md §4.2):
+#
+#   ถ้า resume เอ่ยถึง X เท่านั้น เราพูดได้ไหมว่าผู้สมัคร "ระบุ" Y ไว้?
+#     ได้     → alias   (X กับ Y คือสิ่งเดียวกัน แทนกันได้)
+#     ไม่ได้  → related (เกี่ยวข้องกัน แต่เป็นทักษะต่างตัว)
+#
+#   ตัวอย่าง: pandas → python คือ related ไม่ใช่ alias
+#             การสรุปว่า "มี python เพราะมี pandas" เป็นการอนุมาน
+#             ซึ่งระบบต้องติดธง inferred: true และห้ามนับใน extraction F1
+# ────────────────────────────────────────────────────────────────────────
+#
+# schema ของแต่ละรายการ:
+#   id         : canonical id ที่ระบบใช้ภายใน (snake_case, ไม่เปลี่ยนตลอดอายุเวอร์ชัน)
+#   canonical  : รูปที่แสดงให้คนอ่าน
+#   category   : language | framework | library | tool | platform | database | concept | soft
+#   aliases    : คำที่หมายถึงสิ่งเดียวกัน (ใส่เฉพาะที่จำเป็น)
+#   related    : ทักษะที่เกี่ยวข้องแต่เป็นคนละตัว (ใส่เฉพาะที่ความสัมพันธ์ชัด)
+#   match      : ใส่เฉพาะกรณีที่การจับคำต้องมีเงื่อนไข
+#       requires_context: skills_section | adjacent_tech | uppercase_exact
+#   notes      : เหตุผลการตัดสินใจ — สำหรับคำกำกวมโดยเฉพาะ
+#   context_aliases : (เพิ่มใน 0.1) alias ที่นับได้เฉพาะเมื่อมีบริบท เช่นอยู่ในหัวข้อ Skills
+#                     หรืออยู่ติดกับ token เทคนิค · ใช้กับคำที่เป็นคำภาษาอังกฤษทั่วไปด้วย
+#                     ("excel at", "spark interest") · ไม่คุมชื่อเต็มของทักษะนั้น
+#
+# ────────────────────────────────────────────────────────────────────────
+# CHANGELOG
+#
+# 0.1 (2026-11-24) — เพิ่มชื่อสั้นที่ขาด · พบตอนเขียน smoke set: resume จริงเขียน
+#   "Airflow" "Excel" แทบทุกใบ แต่ v0 นับได้แค่ "Apache Airflow" "Microsoft Excel"
+#   + aliases          : airflow kafka hadoop vue tailwind azure s3 ec2
+#   + context_aliases  : excel spark express   (เป็นคำกริยาภาษาอังกฤษด้วย)
+#   ไม่เพิ่มโดยเจตนา  : next (คำทั่วไป) · lambda (ชน lambda function) · sheets (คำทั่วไป)
+#   ไม่มีการลบหรือเปลี่ยน id ใด ๆ · job ทั้ง 6 ยังอ้าง id เดิมได้ครบ
+#
+# 0   (2026-11-17) — seed จากความรู้สายงาน 104 ทักษะ
+
+taxonomy_version: "0.1"
+
+skills:
+
+  # ═══════════════════════════════════════════════════════
+  # LANGUAGES
+  # ═══════════════════════════════════════════════════════
+
+  - id: python
+    canonical: Python
+    category: language
+    aliases: [python3, "python 3", "python programming"]
+    related: [pandas, numpy, fastapi, django, flask, scikit_learn]
+
+  - id: javascript
+    canonical: JavaScript
+    category: language
+    aliases: [ecmascript, "java script"]
+    related: [typescript, react, nodejs]
+    # "JS" แยกเป็นรายการของตัวเองด้านล่าง เพราะต้องมีเงื่อนไขบริบท
+
+  - id: typescript
+    canonical: TypeScript
+    category: language
+    aliases: [ts]
+    related: [javascript, react, nestjs]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: "'ts' ชนกับคำย่ออื่นได้ ต้องมีบริบท"
+
+  - id: sql
+    canonical: SQL
+    category: language
+    aliases: ["structured query language"]
+    related: [postgresql, mysql, sql_server, bigquery]
+    notes: >
+      SQL Server / MySQL / PostgreSQL เป็นทักษะต่างตัว ไม่ใช่ alias ของ sql
+      ผู้ที่เขียนว่า "SQL Server" ให้ label sql_server ไม่ใช่ sql
+
+  - id: java
+    canonical: Java
+    category: language
+    related: [spring_boot]
+    match:
+      word_boundary: true
+      notes: "ต้องไม่ match คำว่า JavaScript — ใช้ word boundary เท่านั้น"
+
+  - id: c_sharp
+    canonical: "C#"
+    category: language
+    aliases: [csharp, "c sharp", "dotnet c#"]
+
+  - id: go
+    canonical: Go
+    category: language
+    aliases: [golang]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: >
+        'go' เดี่ยว ๆ เป็นคำกริยาภาษาอังกฤษทั่วไป ("go to market")
+        ถ้าเขียน 'golang' ถือว่าชัดเจน ไม่ต้องมีเงื่อนไข
+        ถ้าเขียน 'Go' ในหัวข้อ Skills หรืออยู่ติดกับ token เทคนิค → นับได้
+        นอกนั้น → skills_uncertain
+
+  - id: rust
+    canonical: Rust
+    category: language
+
+  - id: r_lang
+    canonical: R
+    category: language
+    match:
+      requires_context: [skills_section, adjacent_tech, uppercase_exact]
+      notes: >
+        กรณีที่ยากที่สุดใน taxonomy นี้ — ตัวอักษรเดียว
+        ยอมรับเฉพาะเมื่ออยู่ในหัวข้อ Skills และเป็นตัวพิมพ์ใหญ่
+        หรืออยู่ในรายการติดกับภาษาอื่น เช่น "R, Python, SAS"
+        ถ้าไม่เข้าเงื่อนไข → skills_uncertain เสมอ ห้ามเดา
+
+  - id: php
+    canonical: PHP
+    category: language
+
+  - id: bash
+    canonical: Bash
+    category: language
+    aliases: ["shell scripting", "shell script", "unix shell"]
+    related: [linux]
+
+  - id: html
+    canonical: HTML
+    category: language
+    aliases: [html5]
+    related: [css]
+
+  - id: css
+    canonical: CSS
+    category: language
+    aliases: [css3]
+    related: [html, tailwind, sass]
+
+  - id: js_abbrev
+    canonical: JavaScript
+    category: language
+    aliases: [js]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: >
+        'JS' map ไปที่ javascript ได้เมื่อบริบทชัด
+        รายการนี้แยกจาก javascript เพื่อให้เงื่อนไขบริบทผูกกับคำย่อเท่านั้น
+        ตอน normalize ให้รวมผลเป็น id javascript
+
+  # ═══════════════════════════════════════════════════════
+  # BACKEND FRAMEWORKS
+  # ═══════════════════════════════════════════════════════
+
+  - id: fastapi
+    canonical: FastAPI
+    category: framework
+    aliases: ["fast api"]
+    related: [python, rest_api, pydantic]
+
+  - id: django
+    canonical: Django
+    category: framework
+    aliases: ["django rest framework", drf]
+    related: [python, rest_api]
+
+  - id: flask
+    canonical: Flask
+    category: framework
+    related: [python, rest_api]
+
+  - id: nodejs
+    canonical: Node.js
+    category: framework
+    aliases: [node, "node js", nodejs]
+    related: [javascript, express]
+
+  - id: express
+    canonical: Express.js
+    category: framework
+    aliases: [expressjs, "express js"]
+    context_aliases: [express]
+    related: [nodejs, rest_api]
+
+  - id: nestjs
+    canonical: NestJS
+    category: framework
+    aliases: ["nest js"]
+    related: [typescript, nodejs]
+
+  - id: spring_boot
+    canonical: Spring Boot
+    category: framework
+    aliases: [springboot, spring]
+    related: [java]
+
+  - id: pydantic
+    canonical: Pydantic
+    category: library
+    related: [python, fastapi]
+
+  # ═══════════════════════════════════════════════════════
+  # FRONTEND
+  # ═══════════════════════════════════════════════════════
+
+  - id: react
+    canonical: React
+    category: framework
+    aliases: [reactjs, "react js"]
+    related: [javascript, typescript, redux, nextjs]
+
+  - id: nextjs
+    canonical: Next.js
+    category: framework
+    aliases: ["next js", nextjs]
+    related: [react]
+
+  - id: vue
+    canonical: Vue.js
+    category: framework
+    aliases: [vuejs, "vue js", vue]
+    related: [javascript]
+
+  - id: angular
+    canonical: Angular
+    category: framework
+    related: [typescript]
+
+  - id: redux
+    canonical: Redux
+    category: library
+    related: [react]
+
+  - id: tailwind
+    canonical: Tailwind CSS
+    category: framework
+    aliases: [tailwindcss, "tailwind css", tailwind]
+    related: [css]
+
+  - id: sass
+    canonical: Sass
+    category: tool
+    aliases: [scss]
+    related: [css]
+
+  # ═══════════════════════════════════════════════════════
+  # DATA LIBRARIES
+  # ═══════════════════════════════════════════════════════
+
+  - id: pandas
+    canonical: Pandas
+    category: library
+    related: [python, numpy]
+
+  - id: numpy
+    canonical: NumPy
+    category: library
+    related: [python]
+
+  - id: scipy
+    canonical: SciPy
+    category: library
+    related: [python, numpy]
+
+  - id: matplotlib
+    canonical: Matplotlib
+    category: library
+    related: [python, data_visualization]
+
+  - id: seaborn
+    canonical: Seaborn
+    category: library
+    related: [python, matplotlib, data_visualization]
+
+  - id: plotly
+    canonical: Plotly
+    category: library
+    related: [data_visualization]
+
+  # ═══════════════════════════════════════════════════════
+  # MACHINE LEARNING
+  # ═══════════════════════════════════════════════════════
+
+  - id: scikit_learn
+    canonical: scikit-learn
+    category: library
+    aliases: [sklearn, "scikit learn", "sci-kit learn"]
+    related: [python, machine_learning]
+
+  - id: pytorch
+    canonical: PyTorch
+    category: framework
+    aliases: [torch]
+    related: [python, deep_learning]
+
+  - id: tensorflow
+    canonical: TensorFlow
+    category: framework
+    aliases: [tf]
+    related: [python, deep_learning, keras]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: "'tf' ชนกับ Terraform และคำย่ออื่น ต้องมีบริบท"
+
+  - id: keras
+    canonical: Keras
+    category: framework
+    related: [tensorflow, deep_learning]
+
+  - id: xgboost
+    canonical: XGBoost
+    category: library
+    related: [machine_learning]
+
+  - id: lightgbm
+    canonical: LightGBM
+    category: library
+    related: [machine_learning]
+
+  - id: huggingface_transformers
+    canonical: Hugging Face Transformers
+    category: library
+    aliases: [transformers, "hugging face", huggingface]
+    related: [nlp, deep_learning, pytorch]
+
+  - id: sentence_transformers
+    canonical: Sentence Transformers
+    category: library
+    aliases: ["sbert", "sentence-bert"]
+    related: [nlp, huggingface_transformers]
+
+  - id: spacy
+    canonical: spaCy
+    category: library
+    related: [nlp, python]
+
+  - id: nltk
+    canonical: NLTK
+    category: library
+    related: [nlp, python]
+
+  - id: opencv
+    canonical: OpenCV
+    category: library
+    aliases: ["cv2", "open cv"]
+    related: [computer_vision]
+
+  - id: mlflow
+    canonical: MLflow
+    category: tool
+    related: [machine_learning, mlops]
+
+  - id: dvc
+    canonical: DVC
+    category: tool
+    aliases: ["data version control"]
+    related: [mlops]
+
+  # ═══════════════════════════════════════════════════════
+  # DATABASES
+  # ═══════════════════════════════════════════════════════
+
+  - id: postgresql
+    canonical: PostgreSQL
+    category: database
+    aliases: [postgres, psql]
+    related: [sql]
+
+  - id: mysql
+    canonical: MySQL
+    category: database
+    related: [sql]
+
+  - id: sql_server
+    canonical: Microsoft SQL Server
+    category: database
+    aliases: ["ms sql", mssql, "sql server"]
+    related: [sql]
+
+  - id: sqlite
+    canonical: SQLite
+    category: database
+    related: [sql]
+
+  - id: mongodb
+    canonical: MongoDB
+    category: database
+    aliases: [mongo]
+
+  - id: redis
+    canonical: Redis
+    category: database
+
+  - id: elasticsearch
+    canonical: Elasticsearch
+    category: database
+    aliases: [elastic, "elastic search"]
+
+  - id: bigquery
+    canonical: BigQuery
+    category: database
+    aliases: ["google bigquery", "big query"]
+    related: [sql, gcp]
+
+  - id: snowflake
+    canonical: Snowflake
+    category: database
+    related: [sql]
+
+  # ═══════════════════════════════════════════════════════
+  # DATA ENGINEERING
+  # ═══════════════════════════════════════════════════════
+
+  - id: airflow
+    canonical: Apache Airflow
+    category: tool
+    aliases: ["apache airflow", airflow]
+    related: [etl, python]
+
+  - id: spark
+    canonical: Apache Spark
+    category: framework
+    aliases: ["apache spark", pyspark]
+    context_aliases: [spark]
+    related: [etl, python]
+
+  - id: kafka
+    canonical: Apache Kafka
+    category: platform
+    aliases: ["apache kafka", kafka]
+
+  - id: dbt
+    canonical: dbt
+    category: tool
+    aliases: ["data build tool"]
+    related: [sql, data_modeling]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: "'dbt' สั้นและชนกับคำย่ออื่นได้"
+
+  - id: hadoop
+    canonical: Apache Hadoop
+    category: platform
+    aliases: ["apache hadoop", hadoop, hdfs]
+
+  - id: etl
+    canonical: ETL
+    category: concept
+    aliases: [elt, "extract transform load", "data pipeline", "data pipelines"]
+
+  # ═══════════════════════════════════════════════════════
+  # CLOUD & INFRASTRUCTURE
+  # ═══════════════════════════════════════════════════════
+
+  - id: aws
+    canonical: AWS
+    category: platform
+    aliases: ["amazon web services"]
+    related: [s3, ec2, aws_lambda]
+
+  - id: gcp
+    canonical: Google Cloud Platform
+    category: platform
+    aliases: ["google cloud", gcp]
+    related: [bigquery]
+
+  - id: azure
+    canonical: Microsoft Azure
+    category: platform
+    aliases: ["ms azure", azure]
+
+  - id: s3
+    canonical: Amazon S3
+    category: platform
+    aliases: ["aws s3", s3]
+    related: [aws]
+
+  - id: ec2
+    canonical: Amazon EC2
+    category: platform
+    aliases: ["aws ec2", ec2]
+    related: [aws]
+
+  - id: aws_lambda
+    canonical: AWS Lambda
+    category: platform
+    related: [aws]
+    notes: "ต้องไม่สับสนกับ lambda function ในภาษาโปรแกรม — ต้องมีคำ aws หรือ amazon กำกับ"
+
+  - id: docker
+    canonical: Docker
+    category: tool
+    aliases: [containerization, containers]
+    related: [kubernetes, linux]
+    notes: >
+      คำว่า containerization เพียว ๆ ถือเป็น alias หรือไม่ — ตัดสินว่า "ใช่"
+      เพราะในบริบท resume มันหมายถึงเทคโนโลยีเดียวกันแทบทุกครั้ง
+      แต่ถ้า annotator ไม่มั่นใจ ให้ใส่ skills_uncertain ตามคู่มือ §4.1
+      ⚠️ รายการนี้คือเคสที่คาดว่าจะมีข้อโต้แย้ง — ทบทวนหลัง pilot
+
+  - id: kubernetes
+    canonical: Kubernetes
+    category: tool
+    aliases: [k8s, "kube"]
+    related: [docker]
+
+  - id: terraform
+    canonical: Terraform
+    category: tool
+    related: [ci_cd]
+
+  - id: linux
+    canonical: Linux
+    category: platform
+    aliases: [unix, ubuntu]
+
+  - id: git
+    canonical: Git
+    category: tool
+    aliases: [github, gitlab, "version control"]
+    notes: >
+      github / gitlab ถือเป็น alias ของ git ในบริบท resume
+      เพราะคนเขียนสลับกันโดยหมายถึงทักษะเดียวกัน
+      ยกเว้น GitHub Actions ซึ่งเป็น CI/CD แยกรายการ
+
+  - id: github_actions
+    canonical: GitHub Actions
+    category: tool
+    related: [ci_cd, git]
+
+  - id: jenkins
+    canonical: Jenkins
+    category: tool
+    related: [ci_cd]
+
+  # ═══════════════════════════════════════════════════════
+  # BI & SPREADSHEETS
+  # ═══════════════════════════════════════════════════════
+
+  - id: power_bi
+    canonical: Power BI
+    category: tool
+    aliases: [powerbi, "microsoft power bi"]
+    related: [data_visualization]
+
+  - id: tableau
+    canonical: Tableau
+    category: tool
+    related: [data_visualization]
+
+  - id: looker
+    canonical: Looker
+    category: tool
+    aliases: ["looker studio", "google data studio"]
+    related: [data_visualization]
+
+  - id: excel
+    canonical: Microsoft Excel
+    category: tool
+    aliases: ["ms excel", "advanced excel", "pivot tables", vlookup]
+    context_aliases: [excel]
+    related: [data_visualization]
+
+  - id: google_sheets
+    canonical: Google Sheets
+    category: tool
+
+  # ═══════════════════════════════════════════════════════
+  # CONCEPTS
+  # ═══════════════════════════════════════════════════════
+
+  - id: rest_api
+    canonical: REST API
+    category: concept
+    aliases: ["restful api", "restful apis", "rest apis", "restful services", rest]
+
+  - id: graphql
+    canonical: GraphQL
+    category: concept
+
+  - id: microservices
+    canonical: Microservices
+    category: concept
+    aliases: ["microservice architecture"]
+
+  - id: machine_learning
+    canonical: Machine Learning
+    category: concept
+    aliases: [ml, "machine-learning"]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: "'ML' ชนกับคำย่ออื่น ต้องมีบริบท · คำเต็มไม่ต้องมีเงื่อนไข"
+
+  - id: deep_learning
+    canonical: Deep Learning
+    category: concept
+    aliases: [dl, "neural networks", "neural network"]
+
+  - id: nlp
+    canonical: Natural Language Processing
+    category: concept
+    aliases: ["natural language processing", "text mining"]
+
+  - id: computer_vision
+    canonical: Computer Vision
+    category: concept
+    aliases: [cv, "image processing"]
+    match:
+      requires_context: [skills_section, adjacent_tech]
+      notes: "'CV' หมายถึง curriculum vitae ได้ด้วย — อันตรายมากในบริบท resume"
+
+  - id: statistics
+    canonical: Statistics
+    category: concept
+    aliases: [statistical analysis, "stats"]
+
+  - id: ab_testing
+    canonical: A/B Testing
+    category: concept
+    aliases: ["a/b test", "ab test", "split testing"]
+
+  - id: data_visualization
+    canonical: Data Visualization
+    category: concept
+    aliases: ["data viz", "dataviz", "dashboarding"]
+
+  - id: data_modeling
+    canonical: Data Modeling
+    category: concept
+    aliases: ["dimensional modeling", "data modelling"]
+
+  - id: feature_engineering
+    canonical: Feature Engineering
+    category: concept
+
+  - id: mlops
+    canonical: MLOps
+    category: concept
+    aliases: ["ml ops", "model deployment"]
+
+  - id: web_scraping
+    canonical: Web Scraping
+    category: concept
+    aliases: [scraping, "beautifulsoup", "web crawling"]
+
+  - id: unit_testing
+    canonical: Unit Testing
+    category: concept
+    aliases: [pytest, jest, "automated testing", "test driven development", tdd]
+
+  - id: ci_cd
+    canonical: CI/CD
+    category: concept
+    aliases: ["ci/cd", "continuous integration", "continuous deployment"]
+
+  - id: agile
+    canonical: Agile
+    category: concept
+    aliases: [scrum, kanban, "agile methodology"]
+    notes: "scrum / kanban รวมเป็น alias ของ agile ใน v0 — ถ้า pilot พบว่าต้องแยก ให้แยกใน v1"
+
+  - id: oop
+    canonical: Object-Oriented Programming
+    category: concept
+    aliases: ["object oriented programming", "object-oriented design"]
+
+  - id: algorithms
+    canonical: Algorithms & Data Structures
+    category: concept
+    aliases: ["data structures", "algorithms and data structures"]
+
+  # ═══════════════════════════════════════════════════════
+  # SOFT SKILLS
+  # ═══════════════════════════════════════════════════════
+  # นับเฉพาะที่มีหลักฐานรองรับ ไม่นับคำโฆษณาตัวเองลอย ๆ
+  # เช่น "hard working" "passionate" ไม่อยู่ใน taxonomy โดยเจตนา
+
+  - id: leadership
+    canonical: Leadership
+    category: soft
+    aliases: ["team lead", "team leader", "led a team"]
+
+  - id: mentoring
+    canonical: Mentoring
+    category: soft
+    aliases: [coaching, "mentored"]
+
+  - id: presentation
+    canonical: Presentation
+    category: soft
+    aliases: ["presenting", "public speaking", "stakeholder presentation"]
+
+  - id: technical_writing
+    canonical: Technical Writing
+    category: soft
+    aliases: [documentation, "technical documentation"]

@@ -1,0 +1,29 @@
+resume_id: S-003
+profile_id: P-S003
+identity_id: I-003
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mx. Jordan Lee
+  email: jordan.l@example.com
+  phone: 080-000-0003
+skills_stated:
+- docker
+- fastapi
+- git
+- mysql
+- python
+- rest_api
+skills_listed_only: []
+mentioned_not_held: []
+oov_skills: []
+education:
+- degree: bachelor
+  field: Information Technology
+  institution: Example University
+  end_year: 2022
+experience:
+- title: Backend Developer
+  employer: Cart Example Co
+  start: 2023-01
+  end: null

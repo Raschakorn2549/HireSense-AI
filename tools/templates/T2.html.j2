@@ -1,0 +1,52 @@
+{#- T2 — TWO columns: sidebar (contact, skills, education) + main column.
+    This is the layout family that line-by-line extractors mix up (docs/02 §6.5).
+    Identity (name, pronouns, e-mail) appears ONLY in <header>. See docs/01 §11.6. -#}
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  @page { size: A4; margin: 14mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10pt; color: #222; margin: 0; line-height: 1.35; }
+  header { background: #23395d; color: #fff; padding: 12px 16px; margin-bottom: 12px; }
+  header h1 { margin: 0; font-size: 19pt; }
+  header .pronouns { font-size: 10pt; font-weight: normal; opacity: .85; }
+  header .contact { font-size: 9.5pt; margin-top: 2px; }
+  .grid { display: grid; grid-template-columns: 31% 1fr; gap: 18px; }
+  aside { background: #eef1f6; padding: 10px 12px; }
+  h2 { font-size: 10.5pt; text-transform: uppercase; color: #23395d; letter-spacing: 1px; margin: 10px 0 5px; }
+  aside ul { margin: 0; padding-left: 15px; }
+  main ul { margin: 2px 0 8px; padding-left: 16px; }
+  .role { font-weight: bold; }
+  .meta { color: #555; font-size: 9.5pt; margin-bottom: 2px; }
+  p { margin: 0 0 6px; }
+</style></head><body>
+<header>
+  <h1>{{ name }}{% if pronouns %} <span class="pronouns">({{ pronouns }})</span>{% endif %}</h1>
+  <div class="contact">{{ email }}{% if p.phone %} · {{ p.phone }}{% endif %}</div>
+</header>
+<div class="grid">
+  <aside>
+    <h2>Location</h2>
+    <p>{{ p.location }}</p>
+    <h2>Skills</h2>
+    <ul>{% for s in p.skills %}<li>{{ s.text }}</li>{% endfor %}</ul>
+    <h2>Education</h2>
+    {% for e in p.education %}<p><b>{{ e.degree_text }}</b><br>{{ e.institution }}<br>{{ e.end_year }}</p>{% endfor %}
+  </aside>
+  <main>
+    <h2>Profile</h2>
+    <p>{{ p.summary }}</p>
+    {% for goal in p.learning %}<p>{{ goal.text }}</p>{% endfor %}
+    {% if p.experience %}
+    <h2>Experience</h2>
+    {% for job in p.experience %}
+    <div class="role">{{ job.title }}</div>
+    <div class="meta">{{ job.employer }} · {{ job.start | month }} – {{ job.end | month }}</div>
+    <ul>{% for b in job.bullets %}<li>{{ b.text }}</li>{% endfor %}</ul>
+    {% endfor %}
+    {% endif %}
+    {% if p.projects %}
+    <h2>Projects</h2>
+    {% for pr in p.projects %}<p><b>{{ pr.name }}</b> — {{ pr.text }}</p>{% endfor %}
+    {% endif %}
+  </main>
+</div>
+</body></html>

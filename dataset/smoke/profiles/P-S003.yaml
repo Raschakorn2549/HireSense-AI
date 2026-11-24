@@ -1,0 +1,24 @@
+# S-003 — missing ONE required skill (has MySQL, not PostgreSQL), strong evidence for the rest.
+profile_id: P-S003
+location: "Bangkok, Thailand"
+phone: "080-000-0003"
+summary: "Backend developer with two years of experience on an e-commerce platform."
+skills:
+  - {id: python, text: Python}
+  - {id: fastapi, text: FastAPI}
+  - {id: rest_api, text: REST APIs}
+  - {id: git, text: Git}
+  - {id: mysql, text: MySQL}
+  - {id: docker, text: Docker}
+experience:
+  - title: Backend Developer
+    employer: Cart Example Co
+    start: 2023-01
+    end: null
+    bullets:
+      - {text: "Built order and inventory REST APIs in Python using FastAPI.", skills: [rest_api, python, fastapi]}
+      - {text: "Wrote and tuned MySQL queries for the reporting pages.", skills: [mysql]}
+      - {text: "Managed feature branches and code review in Git.", skills: [git]}
+      - {text: "Packaged the API with Docker for the staging environment.", skills: [docker]}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Information Technology", field: "Information Technology", institution: "Example University", end_year: 2022}

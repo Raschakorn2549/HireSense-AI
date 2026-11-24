@@ -1,0 +1,35 @@
+resume_id: S-001
+profile_id: P-S001
+identity_id: I-001
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Mr. Arthit Kittisak
+  email: arthit.k@example.com
+  phone: 080-000-0001
+skills_stated:
+- docker
+- fastapi
+- git
+- postgresql
+- python
+- redis
+- rest_api
+- unit_testing
+skills_listed_only: []
+mentioned_not_held: []
+oov_skills: []
+education:
+- degree: bachelor
+  field: Computer Engineering
+  institution: Example Institute of Technology
+  end_year: 2021
+experience:
+- title: Backend Developer
+  employer: Lumen Pay Example Co
+  start: 2022-03
+  end: null
+- title: Junior Developer
+  employer: Northwind Example Ltd
+  start: 2021-06
+  end: 2022-02

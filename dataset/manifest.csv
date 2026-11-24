@@ -1,0 +1,7 @@
+file_id,sha256,tier,template,source,license,added_at,profile_id,counterfactual_of,role,renderer
+S-001,a9f64902db0b264d2411eef8f2291ba86720972746b8cf2b583a7d4c5a4e7694,,T1,synthetic,internal,2026-11-24,P-S001,,smoke,playwright-1.65.2/msedge-158.0.4370.33
+S-002,ee1cbc0d546d032af1f4ee2d773f7404c3e9370da9b51723e772e92303e92421,,T2,synthetic,internal,2026-11-24,P-S002,,smoke,playwright-1.65.2/msedge-158.0.4370.33
+S-003,35cc6a479fed820be28b65f2b7c4033c93300be624bfcae4df891fedeadb9a57,,T1,synthetic,internal,2026-11-24,P-S003,,smoke,playwright-1.65.2/msedge-158.0.4370.33
+S-004,e4d0b5be115f7a363e110b399c61f00f290f17338b73ba961a6a7e37b3899eef,,T2,synthetic,internal,2026-11-24,P-S004,,smoke,playwright-1.65.2/msedge-158.0.4370.33
+S-005,9cab428190b6e1e6495ba59668c4e6d3444c1147e0642b32e91a0855de7b352e,,T1,synthetic,internal,2026-11-24,P-S005,,smoke,playwright-1.65.2/msedge-158.0.4370.33
+S-006,1714c415cf40839f56a22e3e9894e98d9f23de9a6305c0230e4f432c3836f78c,,T2,synthetic,internal,2026-11-24,P-S006,,smoke,playwright-1.65.2/msedge-158.0.4370.33

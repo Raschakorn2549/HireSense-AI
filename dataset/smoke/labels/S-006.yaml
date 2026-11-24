@@ -1,0 +1,31 @@
+resume_id: S-006
+profile_id: P-S006
+identity_id: I-006
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Meilin Tan
+  email: meilin.t@example.com
+  phone: 080-000-0006
+skills_stated:
+- google_sheets
+skills_listed_only: []
+mentioned_not_held:
+- fastapi
+- git
+- postgresql
+- python
+- rest_api
+oov_skills:
+- Social media marketing
+- Copywriting
+education:
+- degree: bachelor
+  field: Communication Arts
+  institution: Example University
+  end_year: 2023
+experience:
+- title: Marketing Coordinator
+  employer: Bloom Example Agency
+  start: 2023-05
+  end: null

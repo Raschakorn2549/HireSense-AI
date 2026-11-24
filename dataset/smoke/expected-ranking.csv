@@ -1,0 +1,7 @@
+job_id,resume_id,grade,reason
+job-001,S-001,3,"all 5 required, every one used in experience"
+job-001,S-002,2,"all 5 required, but only in the skills list"
+job-001,S-003,2,"missing postgresql (has mysql), other 4 used in experience"
+job-001,S-004,1,"neighbouring field, shares only python and git"
+job-001,S-005,0,"accounting, no required skill"
+job-001,S-006,0,"required words appear only in 'eager to learn', holds none"

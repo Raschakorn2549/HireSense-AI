@@ -1,0 +1,29 @@
+resume_id: S-004
+profile_id: P-S004
+identity_id: I-004
+label_source: generator
+taxonomy_version: '0.1'
+contact:
+  name: Ms. Priya Raman
+  email: priya.r@example.com
+  phone: 080-000-0004
+skills_stated:
+- airflow
+- bigquery
+- etl
+- git
+- python
+- sql
+skills_listed_only: []
+mentioned_not_held: []
+oov_skills: []
+education:
+- degree: bachelor
+  field: Statistics
+  institution: Example University
+  end_year: 2022
+experience:
+- title: Data Engineer
+  employer: Freight Example Co
+  start: 2023-02
+  end: null

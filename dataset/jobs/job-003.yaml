@@ -1,0 +1,40 @@
+job_id: job-003
+title: "Machine Learning Engineer"
+family: ml
+prose_file: job-003.md
+
+taxonomy_version: 0
+annotated_by: korn
+annotated_at: 2026-11-17
+
+experience:
+  min_years: 2
+  max_years: 4
+
+education:
+  min_degree: bachelor
+  fields:
+    - "Computer Science"
+    - "Statistics"
+    - "Mathematics"
+    - "related field"
+
+required_skills:
+  - python
+  - scikit_learn
+  - machine_learning
+  - pandas
+  - statistics
+
+preferred_skills:
+  - pytorch
+  - deep_learning
+  - mlflow
+  - feature_engineering
+  - docker
+
+notes: >
+  prose หัวข้อ Nice to have เขียนว่า Deep learning experience with PyTorch
+  ซึ่งระบุทั้ง deep_learning และ pytorch จึงใส่ทั้งสอง id
+  ตำแหน่งนี้ทับซ้อนกับ job-002 ที่ pandas และ statistics และทับกับ job-001 ที่ python
+  โดยเจตนา เพื่อให้การจัดอันดับไม่ใช่งานที่แค่นับคำก็ชนะ

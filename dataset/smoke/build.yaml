@@ -1,0 +1,16 @@
+# Smoke set build plan — docs/02-dataset-strategy.md §6.4
+# role: smoke -> not a tier, tier column stays empty, never enters reported metrics.
+# Templates: T1/T2 only. T4–T5 are reserved for the evaluation set; using them here
+# would let the parser be developed against the "unseen" layouts (§5.1).
+role: smoke
+tier: ""
+profiles_dir: profiles
+pdf_dir: pdf
+labels_dir: labels
+resumes:
+  - {resume_id: S-001, profile: P-S001, identity: I-001, template: T1}
+  - {resume_id: S-002, profile: P-S002, identity: I-002, template: T2}
+  - {resume_id: S-003, profile: P-S003, identity: I-003, template: T1}
+  - {resume_id: S-004, profile: P-S004, identity: I-004, template: T2}
+  - {resume_id: S-005, profile: P-S005, identity: I-005, template: T1}
+  - {resume_id: S-006, profile: P-S006, identity: I-006, template: T2}

@@ -1,0 +1,22 @@
+# S-002 — every required skill, but ONLY in the skills list. No evidence of use.
+profile_id: P-S002
+location: "Chiang Mai, Thailand"
+phone: "080-000-0002"
+summary: "Recent computer science graduate working in IT support and looking for a first developer role."
+skills:
+  - {id: python, text: Python}
+  - {id: fastapi, text: FastAPI}
+  - {id: postgresql, text: PostgreSQL}
+  - {id: rest_api, text: REST APIs}
+  - {id: git, text: Git}
+experience:
+  - title: IT Support Technician
+    employer: Harbor Example Hospital
+    start: 2024-07
+    end: null
+    bullets:
+      - {text: "Resolved hardware, printer and network tickets for around 200 staff.", skills: []}
+      - {text: "Wrote step-by-step documentation for the most common support requests.", skills: [technical_writing]}
+      - {text: "Set up laptops and accounts for new employees.", skills: []}
+education:
+  - {degree: bachelor, degree_text: "B.Sc. Computer Science", field: "Computer Science", institution: "Example University", end_year: 2024}

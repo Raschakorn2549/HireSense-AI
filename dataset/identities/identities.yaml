@@ -1,0 +1,17 @@
+# Identities are kept SEPARATE from profiles (docs/02-dataset-strategy.md §6.1).
+# resume = profile x identity x template. Swapping only the identity produces a
+# counterfactual pair whose career content is identical character for character.
+#
+# Rules:
+# - fictional names only; do not use a real, identifiable person
+# - ASCII only, because the e-mail address is DERIVED from the name
+#   (firstname.l@example.com) and never written by hand
+# - identity fields appear only in the resume header (docs/01 §11.6)
+
+identities:
+  - {identity_id: I-001, prefix: "Mr.",  given_name: Arthit, family_name: Kittisak, pronouns: he/him}
+  - {identity_id: I-002, prefix: "Ms.",  given_name: Ploy,   family_name: Siriwan,  pronouns: she/her}
+  - {identity_id: I-003, prefix: "Mx.",  given_name: Jordan, family_name: Lee,      pronouns: they/them}
+  - {identity_id: I-004, prefix: "Ms.",  given_name: Priya,  family_name: Raman,    pronouns: she/her}
+  - {identity_id: I-005, prefix: "Mr.",  given_name: Daniel, family_name: Carter,   pronouns: he/him}
+  - {identity_id: I-006, prefix: "Ms.",  given_name: Meilin, family_name: Tan,      pronouns: she/her}

@@ -1,0 +1,23 @@
+# S-006 — every required WORD appears, but only in "eager to learn".
+# Holds none of them. A naive keyword matcher ranks this near the top; it must not.
+profile_id: P-S006
+location: "Bangkok, Thailand"
+phone: "080-000-0006"
+summary: "Marketing coordinator with two years of experience running social media campaigns."
+learning:
+  - text: "Eager to learn Python, FastAPI, PostgreSQL, REST APIs and Git to move into backend development."
+    not_held: [python, fastapi, postgresql, rest_api, git]
+skills:
+  - {text: Social media marketing}
+  - {text: Copywriting}
+  - {id: google_sheets, text: Google Sheets}
+experience:
+  - title: Marketing Coordinator
+    employer: Bloom Example Agency
+    start: 2023-05
+    end: null
+    bullets:
+      - {text: "Planned and scheduled campaigns across four social media channels.", skills: []}
+      - {text: "Tracked campaign results in Google Sheets for weekly client reports.", skills: [google_sheets]}
+education:
+  - {degree: bachelor, degree_text: "B.A. Communication Arts", field: "Communication Arts", institution: "Example University", end_year: 2023}

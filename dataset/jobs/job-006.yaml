@@ -1,0 +1,38 @@
+job_id: job-006
+title: "Data Engineer"
+family: data_engineering
+prose_file: job-006.md
+
+taxonomy_version: 0
+annotated_by: korn
+annotated_at: 2026-11-17
+
+experience:
+  min_years: 2
+  max_years: 4
+
+education:
+  min_degree: bachelor
+  fields:
+    - "Computer Science"
+    - "Information Systems"
+    - "related field"
+
+required_skills:
+  - sql
+  - python
+  - etl
+  - airflow
+  - data_modeling
+
+preferred_skills:
+  - spark
+  - dbt
+  - bigquery
+  - kafka
+  - docker
+
+notes: >
+  prose เขียนว่า ETL or ELT ซึ่ง elt เป็น alias ของ etl ใน taxonomy v0
+  จึงนับเป็น id เดียว
+  ตำแหน่งนี้ทับซ้อนกับ job-002 ที่ sql และ bigquery และทับ job-003 ที่ python

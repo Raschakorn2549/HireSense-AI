@@ -1,0 +1,40 @@
+job_id: job-002
+title: "Data Analyst"
+family: analytics
+prose_file: job-002.md
+
+taxonomy_version: 0
+annotated_by: korn
+annotated_at: 2026-11-17
+
+experience:
+  min_years: 0
+  max_years: 2
+
+education:
+  min_degree: bachelor
+  fields:
+    - "Statistics"
+    - "Economics"
+    - "Business Analytics"
+    - "Computer Science"
+    - "related field"
+
+required_skills:
+  - sql
+  - excel
+  - power_bi
+  - statistics
+  - data_visualization
+
+preferred_skills:
+  - python
+  - pandas
+  - ab_testing
+  - tableau
+  - bigquery
+
+notes: >
+  ตำแหน่งนี้รับจบใหม่ จึงเป็นตำแหน่งที่คาดว่าจะมีผู้สมัคร grade 2-3 มากที่สุด
+  prose เขียนว่า pivot tables และ lookup functions ซึ่งเป็น alias ของ excel ใน taxonomy v0
+  จึงนับเป็น excel ไม่ใช่ทักษะแยก

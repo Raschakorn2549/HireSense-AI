@@ -1,0 +1,28 @@
+Somchai Example (he/him)
+somchai.e@example.com · 080-000-0000
+CONTACT
+Bangkok, Thailand
+SKILLS
+Python
+FastAPI
+PostgreSQL
+Docker
+Kubernetes
+EDUCATION
+B.Sc. Computer Science
+Example University, 2022
+SUMMARY
+Backend developer with three years of experience designing and
+operating HTTP services. Comfortable owning a service from schema
+design to on-call.
+EXPERIENCE
+Backend Developer — Acme Example Co, 2023-01 to Present
+Built and maintained a public API handling two million requests per
+day.
+Moved the deployment pipeline to containers and cut release time in
+half.
+Mentored two junior engineers through their first production
+incidents.
+PROJECTS
+Invoice parser — an internal tool that reads supplier invoices and
+reduced manual data entry for the finance team.

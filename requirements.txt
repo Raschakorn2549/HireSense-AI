@@ -1,0 +1,19 @@
+# HireSense AI — dataset tooling (Phase 1)
+#
+# Versions are copied from an actual working install (pip list, 2026-11-24), not guessed.
+# Install:  .venv/Scripts/python.exe -m pip install -r requirements.txt
+#
+# NOT listed on purpose:
+#   pymupdf   — AGPL-3.0 and pulls in onnxruntime (~17 MB). Installed locally for
+#               experiments only. See docs/02-dataset-strategy.md §6.5.
+#   reportlab — not needed: image-only PDFs are made with Edge + Pillow (§6.1).
+#
+# PDF rendering uses the Microsoft Edge already installed on the machine
+# (Playwright channel "msedge"), so `playwright install` is NOT required.
+
+pyyaml==6.0.3        # MIT        — read taxonomy / jobs / profiles / labels
+jinja2==3.1.6        # BSD        — resume HTML templates
+playwright==1.65.2   # Apache-2.0 — drive Edge to print HTML -> PDF
+pdfplumber==0.11.10  # MIT        — PDF text extraction (pdfminer engine)
+                     #              also installs pypdfium2 (BSD/Apache, PDFium engine)
+                     #              and Pillow (MIT-CMU, image-only PDFs)

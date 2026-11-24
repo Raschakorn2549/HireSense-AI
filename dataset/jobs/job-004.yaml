@@ -1,0 +1,39 @@
+job_id: job-004
+title: "Frontend Developer"
+family: frontend
+prose_file: job-004.md
+
+taxonomy_version: 0
+annotated_by: korn
+annotated_at: 2026-11-17
+
+experience:
+  min_years: 1
+  max_years: 3
+
+education:
+  min_degree: bachelor
+  fields:
+    - "Computer Science"
+    - "Information Technology"
+    - "Digital Media"
+    - "related field or equivalent practical experience"
+
+required_skills:
+  - javascript
+  - typescript
+  - react
+  - html
+  - css
+
+preferred_skills:
+  - nextjs
+  - tailwind
+  - redux
+  - git
+  - unit_testing
+
+notes: >
+  prose เขียนว่า or equivalent practical experience สำหรับวุฒิการศึกษา
+  แปลว่าผู้สมัครที่ไม่มีวุฒิตรงสายไม่ควรถูกลดเกรดจากเหตุนี้เพียงอย่างเดียว
+  ตำแหน่งนี้ทับซ้อนกับ job-005 ที่ typescript และ react โดยเจตนา

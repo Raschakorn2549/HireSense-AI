@@ -1,0 +1,128 @@
+{
+  "edge_version": "157.0.4341.60",
+  "two_column": {
+    "pdfplumber (pdfminer)": {
+      "header_order": [
+        "SUMMARY",
+        "CONTACT",
+        "SKILLS",
+        "EXPERIENCE",
+        "EDUCATION",
+        "PROJECTS"
+      ],
+      "label_sequence": "RLRLRRLxLRLxxRxxRLRRR",
+      "column_switches": 15,
+      "mixed_lines": [
+        "Python EXPERIENCE",
+        "Docker Built and maintained a public API handling two million requests per",
+        "Kubernetes day.",
+        "EDUCATION half.",
+        "B.Sc. Computer Science Mentored two junior engineers through their first production"
+      ],
+      "missing_markers": [
+        "two million requests per day"
+      ]
+    },
+    "pypdfium2 (PDFium)": {
+      "header_order": [
+        "CONTACT",
+        "SKILLS",
+        "EDUCATION",
+        "SUMMARY",
+        "EXPERIENCE",
+        "PROJECTS"
+      ],
+      "label_sequence": "LLLLLLLLLLLRRRRRRRRRRRRRRR",
+      "column_switches": 1,
+      "mixed_lines": [],
+      "missing_markers": []
+    },
+    "pymupdf (MuPDF)": {
+      "header_order": [
+        "CONTACT",
+        "SKILLS",
+        "EDUCATION",
+        "SUMMARY",
+        "EXPERIENCE",
+        "PROJECTS"
+      ],
+      "label_sequence": "LLLLLLLLLLLRRRRRRRRRRRRRRR",
+      "column_switches": 1,
+      "mixed_lines": [],
+      "missing_markers": []
+    }
+  },
+  "hidden_text": {
+    "found": {
+      "pdfplumber (pdfminer)": {
+        "white_on_white": true,
+        "transparent": true,
+        "opacity_zero": false,
+        "font_size_zero": false,
+        "font_size_1px": true,
+        "off_page": false,
+        "display_none": false
+      },
+      "pypdfium2 (PDFium)": {
+        "white_on_white": true,
+        "transparent": true,
+        "opacity_zero": false,
+        "font_size_zero": false,
+        "font_size_1px": true,
+        "off_page": false,
+        "display_none": false
+      },
+      "pymupdf (MuPDF)": {
+        "white_on_white": true,
+        "transparent": true,
+        "opacity_zero": false,
+        "font_size_zero": false,
+        "font_size_1px": true,
+        "off_page": false,
+        "display_none": false
+      }
+    },
+    "first_char_of_token": {
+      "white_on_white": {
+        "size": 12.0,
+        "fill_colour": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "x0": 51.7,
+        "page_width": 595.9
+      },
+      "transparent": {
+        "size": 12.0,
+        "fill_colour": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "x0": 51.7,
+        "page_width": 595.9
+      },
+      "font_size_1px": {
+        "size": 0.75,
+        "fill_colour": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "x0": 51.7,
+        "page_width": 595.9
+      }
+    }
+  },
+  "image_only": {
+    "pdfplumber (pdfminer)": 0,
+    "pypdfium2 (PDFium)": 0,
+    "pymupdf (MuPDF)": 0
+  },
+  "file_sizes_bytes": {
+    "two-column.pdf": 53108,
+    "hidden-text.pdf": 37867,
+    "image-only.pdf": 163250
+  }
+}
